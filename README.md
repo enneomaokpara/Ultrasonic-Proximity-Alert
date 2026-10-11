@@ -3,7 +3,7 @@ A distance-based alert system modeled on car parking sensors: an HC-SR04 ultraso
 **Status:** Designed, wired, and validated in simulation (Tinkercad Circuits). 
 ## How it works
 The HC-SR04 fires an ultrasonic ping and times the echo. Distance = (echo time × speed of sound) / 2.
-
+<img width="1206" height="722" alt="image" src="https://github.com/user-attachments/assets/bb719ab5-b7ec-459b-93a8-9a78a9bc3ef7" />
 Serial Monitor streams live distance readings for debugging.
 ## Design decisions
 - **No buzzer:** the kit had no buzzer, so the danger zone uses a flashing red LED instead of an audible alarm. Same information, zero extra parts.
@@ -17,7 +17,7 @@ ECHO→D10. LEDs green→D5, yellow>D, red→D7 (anodes); each cathode through a
 R3, HC-SR04, 3 LEDs, 3x 220 2 resistors, same code.
 ## Validation (Tinkercad)
 Dragged the sensor's distance slider through all three zones:
-
+<img width="1206" height="526" alt="image" src="https://github.com/user-attachments/assets/c83c4033-902f-4807-8af6-bd6ae5797dd2" />
 All three thresholds trigger in the correct zones. Distances in inches convert cleanly to
 the cm thresholds in code (2.9 in = 7.4 cm <
 10 cm, etc.).
@@ -34,3 +34,6 @@ the cm thresholds in code (2.9 in = 7.4 cm <
 - The USB cable died before the sketch could be uploaded - the physical build is fully wired but untested. (Replacement cable pending.)
 - The Tinkercad rebuild worked exactly as designed on the first simulation run: all three zones triggered at the right thresholds (see validation table above).
 - One self-caught mistake: initially grabbed the 3-pin PING))) sensor in Tinkercad instead of the 4-pin HC-SR04 - caught by checking the pin labels before wiring.
+- ## Honest scope
+Designed and simulation-validated by Emmanuella Okpara. 
+The physical build is wired but not yet upload-tested (USB cable failure).
