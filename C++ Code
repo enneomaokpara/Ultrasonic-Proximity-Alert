@@ -1,0 +1,43 @@
+## Code
+
+```cpp
+const int TRIG = 9, ECHO = 10;
+const int LED_G = 5, LED_Y = 6, LED_R = 7;
+
+void setup() {
+  pinMode(TRIG, OUTPUT); pinMode(ECHO, INPUT);
+  pinMode(LED_G, OUTPUT); pinMode(LED_Y, OUTPUT); pinMode(LED_R, OUTPUT);
+  Serial.begin(9600);
+}
+
+float readCM() {
+  digitalWrite(TRIG, LOW); delayMicroseconds(2);
+  digitalWrite(TRIG, HIGH); delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);
+  long us = pulseIn(ECHO, HIGH, 30000);   // 30ms timeout ~ 5m max
+  return us * 0.0343 / 2.0;
+}
+
+void blinkRed(int times, int ms) {
+  for (int i = 0; i < times; i++) {
+    digitalWrite(LED_R, HIGH); delay(ms);
+    digitalWrite(LED_R, LOW);  delay(ms);
+  }
+}
+
+void loop() {
+  float d = readCM();
+  digitalWrite(LED_G, LOW); digitalWrite(LED_Y, LOW); digitalWrite(LED_R, LOW);
+
+  if (d < 10) {
+    blinkRed(4, 80);                        // danger: frantic red blinking
+  } else if (d < 25) {
+    digitalWrite(LED_Y, HIGH); delay(300);   // caution: solid yellow
+  } else if (d < 50) {
+    digitalWrite(LED_G, HIGH); delay(300);   // clear: solid green
+  } else {
+    delay(300);                             // out of range: quiet
+  }
+  Serial.println(d);
+}
+```
